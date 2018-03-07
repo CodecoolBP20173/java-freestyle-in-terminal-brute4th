@@ -18,7 +18,7 @@ public class Printer {
         String answer1 = hm.get("a1").toString();
         String answer2 = hm.get("a2").toString();
         String answer3 = hm.get("a3").toString();
-        String answer4 = hm.get("a4").toString();
+        String answer4 = hm.get("aGood").toString();
 
         int refX=(cols/2);
         int refY=lines-15;
@@ -41,7 +41,7 @@ public class Printer {
         drawBox(refX -35, refY + 13, "small");
         drawBox(refX +35, refY + 13, "small");
 
-        pt.moveTo(0, lines);
+        pt.moveTo(0, lines); 
     }
 
     public void drawBox(int x, int y, String size){
