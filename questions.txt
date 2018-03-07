@@ -1,12 +1,36 @@
 
-hogy hívnak?
-Lilla
-Laci
-Ákos
-Peti
+Which company was behind the creation of Java?
+Sun Microsystems
+Microsoft
+Borland
+Apple
 
-he?
-igen
-nem
-nem
-cső
+What was the original name for Java
+Oak
+Lisp
+C++
+Ada
+
+What is the name of the inventor (or father) of Java?
+James Gosling
+Bjarne Stroustroup
+Bill Gates
+Dennis Ritchie
+
+Java code that is embedded as a small application in a web page is called a(n)...?
+Applet
+Javabean
+Servlet
+JSP
+
+Java can run on any computer platform that has a ...?
+Java Virtual Machine
+Intel Pentium
+Java compiler
+Linux OS
+
+Which of the following is a Java keyword?
+final
+elsif
+repeat
+select
