@@ -1,6 +1,6 @@
-package com.codecool.termlib;
+package com.codecool.game;
 
-import com.codecool.termlib.ConsoleIn;
+import com.codecool.game.ConsoleIn;
 
 public class Menu {
 

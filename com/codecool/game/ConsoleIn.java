@@ -1,4 +1,4 @@
-package com.codecool.termlib;
+package com.codecool.game;
 
 import java.util.Scanner;
 

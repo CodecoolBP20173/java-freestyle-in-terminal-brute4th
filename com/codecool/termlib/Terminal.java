@@ -42,8 +42,8 @@ public class Terminal {
     }
 
     public void setChar(char c) {
-        System.out.print("SSS");
-        moveCursor("D", 2);
+        System.out.print(c);
+        moveCursor("D", 1);
     }
 
     private void command(String commandString) {
