@@ -4,6 +4,7 @@ import com.codecool.termlib.Terminal;
 import com.codecool.termlib.Color;
 import com.codecool.termlib.Direction;
 import com.codecool.data_manager.*;
+import java.util.*;
 
 
 
@@ -14,5 +15,8 @@ public class quiz_game {
         write.saveScore("Mucika", 852);
 
 
+        /* ReadFile read = new ReadFile();
+        ArrayList<HashMap<String, String>> questions = read.questions();
+        System.out.println(questions.get(0)); */
     }
 }
