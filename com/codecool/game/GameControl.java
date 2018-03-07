@@ -15,13 +15,10 @@ public class GameControl {
 
         ArrayList<HashMap<String, String>> questions = read.questions();
         questionOrder = randNumberList(numberOfQuestions);
-        System.out.println(questions.get(5));
-        System.out.println(questionOrder);
 
         while(true){
             int questionNumber = questionOrder.get(questionOrder.size() - 1);
             questionOrder.remove(questionNumber);
-            System.out.println(questions.get(questionNumber));
             pr.displayQuestionsAnswers(questions.get(questionNumber));
             break;
         }
