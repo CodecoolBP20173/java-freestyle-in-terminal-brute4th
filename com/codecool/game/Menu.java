@@ -1,6 +1,7 @@
 package com.codecool.game;
 
 import com.codecool.game.ConsoleIn;
+import com.codecool.termlib.*;
 
 public class Menu {
 
