@@ -2,7 +2,6 @@ package com.codecool.data_manager;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Stream;
 
 public class ReadFile {
     public ArrayList<String> readFile(String file) {

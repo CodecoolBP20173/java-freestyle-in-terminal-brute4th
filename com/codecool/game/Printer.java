@@ -2,9 +2,10 @@ package com.codecool.game;
 
 import com.codecool.termlib.Terminal;
 import com.codecool.termlib.Direction;
+import com.codecool.data_manager.*;
 
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.*;
+
 
 public class Printer {
 
@@ -76,5 +77,16 @@ public class Printer {
             System.out.println("|");
             pt.moveCursor("C", x + boxWidth/2-1);
         }
+    }
+
+    public void displayTopScore(int amount) {
+        ReadFile read = new ReadFile();
+        Map<String, Integer> topScore = read.getScore();
+        int count = 0;
+        for (String name : topScore.keySet()) {
+            if (count >= amount) break;
+            System.out.println(name + ": " + topScore.get(name));
+            }
+        
     }
 }
