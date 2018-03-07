@@ -37,6 +37,9 @@ public class Printer {
         System.out.println("4. " + answer4);
         drawBox(refX, refY, "large");
         drawBox(refX -35, refY + 6, "small");
+        drawBox(refX +35, refY + 6, "small");
+        drawBox(refX -35, refY + 13, "small");
+        drawBox(refX +35, refY + 13, "small");
 
         pt.moveTo(0, lines);
     }
