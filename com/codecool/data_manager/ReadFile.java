@@ -1,8 +1,7 @@
 package com.codecool.data_manager;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.ArrayList;
+import java.util.*;
 
 public class ReadFile {
     public ArrayList<String> readFile(String file) {
@@ -30,11 +29,8 @@ public class ReadFile {
             ArrayList<String> dataFromFile = new ArrayList<String>();
 
             while((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
                 dataFromFile.add(line);
             }   
-
-            System.out.println(dataFromFile);
         
             // Always close files.
             bufferedReader.close();    
@@ -52,9 +48,27 @@ public class ReadFile {
             // Or we could just do this: 
             // ex.printStackTrace();
         }
+
     ArrayList<String> datat = new ArrayList<String>();
     String str="vmi";
     datat.add(str);
     return datat;
+    }
+
+    public  ArrayList<HashMap<String, String>> questions() {
+        ArrayList<String> questionList = readFile("questions");
+        int length = questionList.size()/6;
+        ArrayList<HashMap<String, String>> questions = new ArrayList<HashMap<String, String>>();
+
+        for (int i = 0; i < length; i++) {
+            HashMap<String, String> question = new HashMap<String, String>();
+            question.put("question",new String(questionList.get(1+(i*6))));
+            question.put("aGood", questionList.get(2+(i*6)));
+            question.put("a1", questionList.get(3+(i*6)));
+            question.put("a2", questionList.get(4+(i*6)));
+            question.put("a3", questionList.get(5+(i*6)));
+            questions.add(question);
+        }
+        return questions;
     }
 }
