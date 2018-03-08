@@ -2,8 +2,6 @@ package com.codecool.game;
 
 import com.codecool.game.*;
 import com.codecool.termlib.*;
-import com.codecool.game.ConsoleIn;
-import com.codecool.termlib.Terminal;;
 
 public class Menu {
 
@@ -24,7 +22,7 @@ public class Menu {
         System.out.println("============================");
     }
     
-    public void handleMainMenu() {
+    public void handleMainMenu() throws Exception {
         ConsoleIn consoleInputStream = new ConsoleIn();
         int userInput;
         boolean exit = false;
@@ -40,8 +38,8 @@ public class Menu {
             break;
             case 2:
             System.out.println("Option 2 selected");
-            //Score show = new Score();
-            //show.handleScore();
+            Score show = new Score();
+            show.handleScore();
             break;
             case 3:
             System.out.println("Option 3 selected");
