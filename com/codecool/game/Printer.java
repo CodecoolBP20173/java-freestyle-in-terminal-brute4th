@@ -4,12 +4,14 @@ import com.codecool.termlib.Terminal;
 import com.codecool.termlib.Color;
 import com.codecool.termlib.Direction;
 import com.codecool.data_manager.*;
-import com.codecool.game.AsciiDrawer;
-import com.codecool.game.GameControl;
+import com.codecool.game.*;
 
 import java.util.*;
 
 public class Printer {
+
+    Terminal pt = new Terminal();
+    ConsoleIn consoleInputStream = new ConsoleIn();
 
     //terminal command: tput cols
     int cols=183;
@@ -21,10 +23,7 @@ public class Printer {
     int refY=lines-15;
 
     public String displayWelcomePage(){
-        Terminal pt = new Terminal();
-        ConsoleIn consoleInputStream = new ConsoleIn();
-
-        String question = "Wlecome! Please type your name!";
+        String question = "Welcome! Please type your name!";
         String input = "Name: ";
 
         pt.clearScreen();
@@ -38,7 +37,6 @@ public class Printer {
     }
 
     public void displayQuestionsAnswers(HashMap hm, boolean halving) throws Exception{
-        Terminal pt = new Terminal();
         GameControl gc = new GameControl();
         AsciiDrawer drawer = new AsciiDrawer();
         
@@ -87,7 +85,9 @@ public class Printer {
 
         //display help options
         boolean checkHelpHalving = gc.getHelpHalving();
-        if (checkHelpHalving){
+        boolean checkHelpPass = gc.getHelpPass();
+
+        if (checkHelpHalving || checkHelpPass){
             pt.moveTo(140, 29);
             pt.setUnderline("Available help: ");
             pt.resetStyle();
@@ -100,6 +100,12 @@ public class Printer {
             pt. moveTo(140, 31);
             System.out.print("Press 5: ");
             drawer.printTextArt(140, 33, "50 :50", AsciiDrawer.ART_SIZE_SMALL);
+        }
+
+        if(checkHelpPass){
+            pt. moveTo(140, 44);
+            System.out.print("Press 6: ");
+            drawer.printTextArt(140, 46, "PASS", AsciiDrawer.ART_SIZE_SMALL);
         }
 
         //display score
@@ -115,9 +121,7 @@ public class Printer {
         pt.moveTo(0, lines); 
     }
 
-    public void drawBox(int x, int y, String size){
-        Terminal pt = new Terminal();
-        
+    public void drawBox(int x, int y, String size){        
         int boxWidth = 0;
         int boxHeight = 0;
 
@@ -149,9 +153,26 @@ public class Printer {
         }
     }
 
+    public void displayEndScreen(String username, int score) throws Exception{
+        String message = "Congratulation " + username + "! Your score is " + score + ".";
+        String back = "Press 1 to go back to the main menu!";
+        pt.clearScreen();
+        displayLogo();
+        pt.moveTo(refX -(message.length()/2), refY);
+        pt.setColor(Color.GREEN.getColorCode());
+        System.out.print(message);
+        pt.setColor(Color.DEFAULT.getColorCode());
+        drawBox(refX, refY, "large");
+        pt.moveTo(refX -(back.length()/2), refY + 6);
+        int input = consoleInputStream.askInputInt(back);
+        Menu HomeScreen = new Menu();
+        if (input == 1) {
+            HomeScreen.handleMainMenu();
+        }
+    }    
+
     public void displayTopScore(int amount) throws Exception {
         ReadFile read = new ReadFile();
-        Terminal term = new Terminal();
         AsciiDrawer drawer = new AsciiDrawer();
 
         Map<String, Integer> topScore = read.getScore();
@@ -163,11 +184,11 @@ public class Printer {
         Integer placement=1;
         for (String name : topScore.keySet()) {
             if (count >= amount) break;
-            term.moveCursor("C", 80);
+            pt.moveCursor("C", 80);
             System.out.println(placement.toString() + ". " + name + ": " + topScore.get(name));
             placement++;
             }
-        term.moveTo(80, 50);
+        pt.moveTo(80, 50);
     }
     public Integer getCorrectAnswer(){
         return correctAnswer;
@@ -182,15 +203,14 @@ public class Printer {
 
     public void displayLogo(){
         ReadFile txtInput = new ReadFile();
-        Terminal term = new Terminal();
         ArrayList<String> logo = txtInput.readFile("logo");
-        term.setColor(Color.YELLOW.getColorCode());
-        term.moveTo(17, 3);
+        pt.setColor(Color.YELLOW.getColorCode());
+        pt.moveTo(17, 3);
         for (int i=0; i < logo.size(); i++) {
-            term.moveTo(17, 3+i);
+            pt.moveTo(17, 3+i);
             System.out.println(logo.get(i));
         }
-        term.setColor(Color.DEFAULT.getColorCode());
+        pt.setColor(Color.DEFAULT.getColorCode());
     }
 
 

@@ -9,20 +9,22 @@ import java.util.Random;
 
 public class GameControl {
     
-    Printer pr = new Printer();
+    public Printer pr = new Printer();
     
     public static boolean helpHalving = true;
+    public static boolean helpPass = true;
     public static Integer playerScore = 0;
-    int numberOfQuestions=6;
-    public static String username = "";    
-    String[] filenames = {"dance", "narwhal"};
-    int[] heights = {3, 15};
-    int[] frames = {24, 52};
-    int[] sleep = {150, 150};
-    int[] x = {0, 65};
-    int[] y = {30, 30};
-    private int timer = 20;
     
+    String[] filenames = {"dance", "narwhal.1", "narwhal.2", "narwhal.3"};
+    int[] heights = {3, 15, 15, 15};
+    int[] frames = {24, 13, 13, 28};
+    int[] sleep = {150, 150, 150, 150};
+    int[] x = {0, 65, 65, 65};
+    int[] y = {30, 30, 30, 30};
+    int numberOfQuestions=6;
+    private int timer = 20;
+    public static String username = "";    
+
     public String welcomePage() {
         username = pr.displayWelcomePage();
         return username;
@@ -48,6 +50,8 @@ public class GameControl {
             System.out.println(" Select option: ");
             Integer userInput = waitInput(true);
             if (userInput == 6) {
+                toggleHelpPass();
+                updateScore(-20);
                 pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), false);
                 System.out.println(" Select option: ");
                 userInput = waitInput(true);
@@ -55,6 +59,7 @@ public class GameControl {
                         updateScore(-20);
                         toggleHelpHalving();
                         pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), true);
+                        System.out.println(" Select option: ");
                         userInput = waitInput(false);
                         }    
             }
@@ -62,7 +67,15 @@ public class GameControl {
                 updateScore(-20);
                 toggleHelpHalving();
                 pr.displayQuestionsAnswers(questions.get(num), true);
+                System.out.println(" Select option: ");
                 userInput = waitInput(false);
+                if (userInput == 6) {
+                    toggleHelpPass();
+                    updateScore(-20);
+                    pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), false);
+                    System.out.println(" Select option: ");
+                    userInput = waitInput(true);
+                }            
             }
             Integer solution = pr.getCorrectAnswer();
             if(userInput == solution){
@@ -83,8 +96,12 @@ public class GameControl {
         WriteFile save = new WriteFile();
         save.saveScore(username, playerScore);
 
-        //save score here!!!
+        endScreen();
             
+    }
+
+    public void endScreen()  throws Exception{
+        pr.displayEndScreen(username, playerScore);
     }
 
     public ArrayList<Integer> randNumberList(int numberOfQuestions){
@@ -109,6 +126,14 @@ public class GameControl {
 
     public void toggleHelpHalving(){
         helpHalving = !helpHalving;
+    }
+
+    public boolean getHelpPass(){
+        return helpPass;
+    }
+
+    public void toggleHelpPass(){
+        helpPass = !helpPass;
     }
 
     public void updateScore(Integer points){
