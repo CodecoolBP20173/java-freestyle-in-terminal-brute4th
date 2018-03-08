@@ -7,6 +7,7 @@ import com.codecool.termlib.Terminal;
 import java.util.*;
 import com.codecool.game.AsciiDrawer;
 import java.util.concurrent.TimeUnit;
+import com.codecool.game.Animation;
 
 public class GameControl {
 
@@ -18,6 +19,7 @@ public class GameControl {
         ConsoleIn consoleInputStream = new ConsoleIn();
         Terminal term = new Terminal();
         AsciiDrawer drawer = new AsciiDrawer();
+        Animation anim = new Animation();
 
         ArrayList<HashMap<String, String>> questions = read.questions();
         ArrayList<Integer> questionOrder = randNumberList(numberOfQuestions);
@@ -32,6 +34,7 @@ public class GameControl {
                 //System.out.println("telibe");
                 //term.moveTo(10, 10);
                 term.clearScreen();
+                anim.GoodAnswer(15, 52);
                 drawer.printTextArt(30, 20, "TELIBE", AsciiDrawer.ART_SIZE_HUGE);
                 TimeUnit.SECONDS.sleep(3);
             } else {

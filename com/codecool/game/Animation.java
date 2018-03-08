@@ -10,8 +10,8 @@ public class Animation {
     ReadFile txtInput = new ReadFile();
     Thread t;
 
-    public void GoodAnswer(int height, int frames) {
-        String[] filenames = new String[2]; // ide kell betölteni a txt fájl nevét 
+    public void GoodAnswer(int height, int frames, int sleep) {
+        String[] filenames = {"narwhal"}; // ide kell betölteni a txt fájl nevét 
         ArrayList<String> ascii_animation = txtInput.readFile(filenames[new Random().nextInt(filenames.length)]);
         int index = 0;
         for (int i = 0; i < frames; i++) {
@@ -22,7 +22,7 @@ public class Animation {
                 index+=1;
             }
             try {
-                Thread.sleep(25);
+                Thread.sleep(sleep);
             } catch (Exception e) {
                 System.out.println(e);
             }
