@@ -17,6 +17,25 @@ public class Printer {
     int lines=52;
 
     int correctAnswer;
+    int refX=(cols/2);
+    int refY=lines-15;
+
+    public String displayWelcomePage(){
+        Terminal pt = new Terminal();
+        ConsoleIn consoleInputStream = new ConsoleIn();
+
+        String question = "Wlecome! Please type your name!";
+        String input = "Name: ";
+
+        pt.clearScreen();
+        displayLogo();
+        pt.moveTo(refX -(question.length()/2), refY);
+        System.out.print(question);
+        drawBox(refX, refY, "large");
+        pt.moveTo(refX -(input.length()/2), refY + 6);
+        String username = consoleInputStream.askInputString(input);
+        return username;
+    }
 
     public void displayQuestionsAnswers(HashMap hm, boolean halving) throws Exception{
         Terminal pt = new Terminal();
@@ -87,6 +106,11 @@ public class Printer {
         Integer playerScore = gc.getScore();
         pt.moveTo(160, 3);
         System.out.print("Score: " + playerScore.toString());
+
+        //display name
+        String username = gc.getUsername();
+        pt.moveTo(140, 3);
+        System.out.print("Player: " + username);
         
         pt.moveTo(0, lines); 
     }
@@ -160,7 +184,6 @@ public class Printer {
             System.out.println(logo.get(i));
         }
         term.setColor(Color.DEFAULT.getColorCode());
-
     }
 
 
