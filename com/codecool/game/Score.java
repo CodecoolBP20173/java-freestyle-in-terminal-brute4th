@@ -6,8 +6,8 @@ import com.codecool.data_manager.*;
 import java.util.*;
 
 
-public class Score {
-    public void printScore() {
+public class Score{
+    public void printScore() throws Exception {
         Terminal term = new Terminal();
         term.clearScreen();
         Printer print = new Printer();
@@ -15,7 +15,7 @@ public class Score {
 
     }
     
-    public void handleScore() {
+    public void handleScore() throws Exception{
         ConsoleIn consoleInputStream = new ConsoleIn();
         int userInput;
         boolean back = false;
