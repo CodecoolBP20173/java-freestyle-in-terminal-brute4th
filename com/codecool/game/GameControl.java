@@ -12,6 +12,7 @@ public class GameControl {
     Printer pr = new Printer();
     
     public static boolean helpHalving = true;
+    public static boolean helpPass = true;
     public static Integer playerScore = 0;
     int numberOfQuestions=6;
     public static String username = "";    
@@ -46,6 +47,8 @@ public class GameControl {
             userInput = consoleInputStream.askInputInt(" Select option: ");
 
             if (userInput == 6) {
+                toggleHelpPass();
+                updateScore(-20);
                 pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), false);
                 userInput = consoleInputStream.askInputInt(" Select option: ");
                     if (userInput == 5) {
@@ -105,6 +108,14 @@ public class GameControl {
 
     public void toggleHelpHalving(){
         helpHalving = !helpHalving;
+    }
+
+    public boolean getHelpPass(){
+        return helpPass;
+    }
+
+    public void toggleHelpPass(){
+        helpPass = !helpPass;
     }
 
     public void updateScore(Integer points){

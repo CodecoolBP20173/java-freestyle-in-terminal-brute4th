@@ -87,7 +87,9 @@ public class Printer {
 
         //display help options
         boolean checkHelpHalving = gc.getHelpHalving();
-        if (checkHelpHalving){
+        boolean checkHelpPass = gc.getHelpPass();
+
+        if (checkHelpHalving || checkHelpPass){
             pt.moveTo(140, 29);
             pt.setUnderline("Available help: ");
             pt.resetStyle();
@@ -100,6 +102,12 @@ public class Printer {
             pt. moveTo(140, 31);
             System.out.print("Press 5: ");
             drawer.printTextArt(140, 33, "50 :50", AsciiDrawer.ART_SIZE_SMALL);
+        }
+
+        if(checkHelpPass){
+            pt. moveTo(140, 44);
+            System.out.print("Press 6: ");
+            drawer.printTextArt(140, 46, "PASS", AsciiDrawer.ART_SIZE_SMALL);
         }
 
         //display score
