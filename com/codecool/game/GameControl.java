@@ -10,6 +10,8 @@ import java.util.Random;
 public class GameControl {
 
     int numberOfQuestions=6;
+    public static boolean helpHalving = true;
+    
     String[] filenames = {"dance", "narwhal"};
     int[] heights = {3, 15};
     int[] frames = {24, 52};
@@ -32,6 +34,7 @@ public class GameControl {
             pr.displayQuestionsAnswers(questions.get(num), false);
             userInput = consoleInputStream.askInputInt(" Select option: ");
             if (userInput == 5) {
+                toggleHelpHalving();
                 pr.displayQuestionsAnswers(questions.get(num), true);
                 userInput = consoleInputStream.askInputInt(" Select option: ");
                 }
@@ -60,5 +63,13 @@ public class GameControl {
         Collections.shuffle(list);
         ArrayList<Integer> result = new ArrayList<Integer>(list.subList(0, 5));
         return result;
+    }
+
+    public boolean getHelpHalving(){
+        return helpHalving;
+    }
+
+    public void toggleHelpHalving(){
+        helpHalving = !helpHalving;
     }
 }
