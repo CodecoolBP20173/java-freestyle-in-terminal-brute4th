@@ -1,20 +1,38 @@
 package com.codecool.game;
 
 import com.codecool.data_manager.*;
-import com.codecool.game.Printer;
-import com.codecool.game.ConsoleIn;
 import com.codecool.termlib.Terminal;
 import java.util.*;
-import com.codecool.game.AsciiDrawer;
+import com.codecool.game.*;
 import java.util.concurrent.TimeUnit;
+import java.util.Random;
 
 public class GameControl {
-
+    
+    Printer pr = new Printer();
+    
+    public static boolean helpHalving = true;
+    public static Integer playerScore = 0;
     int numberOfQuestions=6;
+    public static String username = "";    
+    String[] filenames = {"dance", "narwhal"};
+    int[] heights = {3, 15};
+    int[] frames = {24, 52};
+    int[] sleep = {150, 150};
+    int[] x = {0, 65};
+    int[] y = {30, 30};
+    
+    public String welcomePage() {
+        username = pr.displayWelcomePage();
+        return username;
+    }
+
+    public String getUsername(){
+        return username;
+    }
 
     public void mainGame() throws Exception{
         ReadFile read = new ReadFile();
-        Printer pr = new Printer();
         ConsoleIn consoleInputStream = new ConsoleIn();
         Terminal term = new Terminal();
         AsciiDrawer drawer = new AsciiDrawer();
@@ -31,29 +49,38 @@ public class GameControl {
                 pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), false);
                 userInput = consoleInputStream.askInputInt(" Select option: ");
                     if (userInput == 5) {
-                pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), true);
-                userInput = consoleInputStream.askInputInt(" Select option: ");
-                }    
+                        updateScore(-20);
+                        toggleHelpHalving();
+                        pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), true);
+                        userInput = consoleInputStream.askInputInt(" Select option: ");
+                        }    
             } else if (userInput == 5) {
+                updateScore(-20);
+                toggleHelpHalving();
                 pr.displayQuestionsAnswers(questions.get(num), true);
                 userInput = consoleInputStream.askInputInt(" Select option: ");
             }
 
             int solution = pr.getCorrectAnswer();
             if(userInput == solution){
-                //placeholder
-                //System.out.println("telibe");
-                //term.moveTo(10, 10);
+                updateScore(100);
+                int index = new Random().nextInt(filenames.length);
                 term.clearScreen();
-                drawer.printTextArt(30, 20, "TELIBE", AsciiDrawer.ART_SIZE_HUGE);
-                TimeUnit.SECONDS.sleep(3);
+                Animation a = new Animation();
+                a.AnswerAnimation(filenames[index], heights[index], frames[index], sleep[index], x[index], y[index]);
+                TimeUnit.SECONDS.sleep(1);
             } else {
-                //placeholder
+                updateScore(-50);
                 term.clearScreen();
-                drawer.printTextArt(70, 15, ": (", AsciiDrawer.ART_SIZE_HUGE);
+                Animation a = new Animation();
+                a.AnswerAnimation("fail", 8, 9, 400, 0, 30);
                 TimeUnit.SECONDS.sleep(3);
             }
         }
+        WriteFile save = new WriteFile();
+        save.saveScore(username, playerScore);
+
+        //save score here!!!
             
     }
 
@@ -66,4 +93,25 @@ public class GameControl {
         ArrayList<Integer> result = new ArrayList<Integer>(list.subList(0, 6));
         return result;
     }
-}   
+
+    public void setUser(){
+        ConsoleIn consoleInputStream = new ConsoleIn();
+        username = consoleInputStream.askInputString(" Type your name: ");
+    }
+
+    public boolean getHelpHalving(){
+        return helpHalving;
+    }
+
+    public void toggleHelpHalving(){
+        helpHalving = !helpHalving;
+    }
+
+    public void updateScore(Integer points){
+        playerScore += points;
+    }
+
+    public Integer getScore(){
+        return playerScore;
+    }
+}

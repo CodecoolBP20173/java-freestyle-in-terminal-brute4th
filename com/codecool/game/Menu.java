@@ -8,21 +8,11 @@ public class Menu {
     private int option;
 
     public void printMainMenu() {
-        Terminal term = new Terminal();
-        term.clearScreen();
-
-        System.out.println("============================");
-        System.out.println("|        QUIZ  GAME        |");
-        System.out.println("============================");
-        System.out.println("| Options:                 |");
-        System.out.println("|        1. New Game       |");
-        System.out.println("|        2. High Scores    |");
-        System.out.println("|        3. Credits        |");
-        System.out.println("|        4. Exit           |");
-        System.out.println("============================");
+        Animation menu = new Animation();
+        menu.MainMenu(17,40);
     }
     
-    public void handleMainMenu() {
+    public void handleMainMenu() throws Exception {
         ConsoleIn consoleInputStream = new ConsoleIn();
         int userInput;
         boolean exit = false;
@@ -32,17 +22,16 @@ public class Menu {
             userInput = consoleInputStream.askInputInt(" Select option: ");
             switch (userInput) {
             case 1:
-            System.out.println("Option 1 selected");
             option=1;
             exit = true;
             break;
             case 2:
-            System.out.println("Option 2 selected");
             Score show = new Score();
             show.handleScore();
             break;
             case 3:
-            System.out.println("Option 3 selected");
+                Credits credit = new Credits();
+                credit.printCredits();
             break;
             case 4:
             System.out.println("Good bye! See you next time ;)");
