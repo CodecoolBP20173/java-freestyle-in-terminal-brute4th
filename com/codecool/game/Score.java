@@ -26,7 +26,7 @@ public class Score {
             if (userInput == 1) {
                 back = true;
                 break;
-            }
+            }           
         }
     }
 

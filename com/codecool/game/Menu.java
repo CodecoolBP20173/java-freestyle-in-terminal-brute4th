@@ -40,8 +40,6 @@ public class Menu {
             System.out.println("Option 2 selected");
             Score show = new Score();
             show.handleScore();
-            option=2;
-            exit = true;
             break;
             case 3:
             System.out.println("Option 3 selected");
