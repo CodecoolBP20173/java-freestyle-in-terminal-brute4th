@@ -5,6 +5,8 @@ import com.codecool.termlib.*;
 
 public class Menu {
 
+    private int option;
+
     public void printMainMenu() {
         Terminal term = new Terminal();
         term.clearScreen();
@@ -31,11 +33,15 @@ public class Menu {
             switch (userInput) {
             case 1:
             System.out.println("Option 1 selected");
+            option=1;
+            exit = true;
             break;
             case 2:
             System.out.println("Option 2 selected");
             Score show = new Score();
             show.handleScore();
+            option=2;
+            exit = true;
             break;
             case 3:
             System.out.println("Option 3 selected");
@@ -49,6 +55,10 @@ public class Menu {
             break;
             }
         }
+    }
+
+    public Integer getOption(){
+        return option;
     }
     
 }   

@@ -10,7 +10,6 @@ public class Score {
     public void printScore() {
         Terminal term = new Terminal();
         term.clearScreen();
-
         Printer print = new Printer();
         print.displayTopScore(15);
 
@@ -19,15 +18,20 @@ public class Score {
     public void handleScore() {
         ConsoleIn consoleInputStream = new ConsoleIn();
         int userInput;
-        boolean exit = false;
+        boolean back = false;
 
-        while (!exit) {
+        while (!back) {
             printScore();
             userInput = consoleInputStream.askInputInt(" Press 1 to go back! ");
             if (userInput == 1) {
-            exit = true;
-            break;
+                back = true;
+                break;
             }
         }
+    }
+
+    public int countScore(int time) {
+        int newScore = time * 10;
+        return newScore;
     }
 }

@@ -11,9 +11,6 @@ import java.util.*;
 
 public class quiz_game {
     public static void main(String[] args) {
-
-        Terminal term = new Terminal();
-        quiz_game game = new quiz_game();
         Menu HomeScreen = new Menu();
         HomeScreen.handleMainMenu();
         /*
@@ -31,6 +28,18 @@ public class quiz_game {
         ArrayList<HashMap<String, String>> questions = read.questions();
         System.out.println(questions.get(0));
         */
+        GameControl controller = new GameControl();
+        switch(HomeScreen.getOption()){
+            case 1:
+                controller.mainGame();
+                break;
+            case 2:
+                //controller.showScores();
+                break;
+            case 3:
+                //controller.showCredits();
+                break;
+        }
     }
 
 }

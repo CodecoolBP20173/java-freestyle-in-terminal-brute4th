@@ -6,7 +6,6 @@ import com.codecool.data_manager.*;
 
 import java.util.*;
 
-
 public class Printer {
 
     //terminal command: tput cols
@@ -14,12 +13,23 @@ public class Printer {
     //terminal command: tput lines
     int lines=52;
 
+    int correctAnswer;
+
     public void displayQuestionsAnswers(HashMap hm){
         String question = hm.get("question").toString();
         String answer1 = hm.get("a1").toString();
         String answer2 = hm.get("a2").toString();
         String answer3 = hm.get("a3").toString();
-        String answer4 = hm.get("a4").toString();
+        String answer4 = hm.get("aGood").toString();
+
+        ArrayList<String> randomOrderList = new ArrayList<String>();
+        randomOrderList.add(answer1);
+        randomOrderList.add(answer2);
+        randomOrderList.add(answer3);
+        randomOrderList.add(answer4);
+        Collections.shuffle(randomOrderList);
+
+        correctAnswer = randomOrderList.indexOf(answer4) + 1;
 
         int refX=(cols/2);
         int refY=lines-15;
@@ -28,21 +38,21 @@ public class Printer {
         pt.clearScreen();
         pt.moveTo(refX -(question.length()/2), refY);
         System.out.print(question);
-        pt.moveTo(refX - 35, refY + 6);
-        System.out.print("1. " + answer1);
-        pt.moveTo(refX + 35, refY + 6);
-        System.out.print("2. " + answer2);
-        pt.moveTo(refX - 35, refY + 13);
-        System.out.print("3. " + answer3);
-        pt.moveTo(refX + 35, refY + 13);
-        System.out.println("4. " + answer4);
+        pt.moveTo(refX - 45, refY + 6);
+        System.out.print("1. " + randomOrderList.get(0));
+        pt.moveTo(refX + 15, refY + 6);
+        System.out.print("2. " + randomOrderList.get(1));
+        pt.moveTo(refX - 45, refY + 13);
+        System.out.print("3. " + randomOrderList.get(2));
+        pt.moveTo(refX + 15, refY + 13);
+        System.out.println("4. " + randomOrderList.get(3));
         drawBox(refX, refY, "large");
-        drawBox(refX -35, refY + 6, "small");
-        drawBox(refX +35, refY + 6, "small");
-        drawBox(refX -35, refY + 13, "small");
-        drawBox(refX +35, refY + 13, "small");
+        drawBox(refX -30, refY + 6, "small");
+        drawBox(refX +30, refY + 6, "small");
+        drawBox(refX -30, refY + 13, "small");
+        drawBox(refX +30, refY + 13, "small");
 
-        pt.moveTo(0, lines);
+        pt.moveTo(0, lines); 
     }
 
     public void drawBox(int x, int y, String size){
@@ -62,7 +72,7 @@ public class Printer {
                 break;
         }
         
-        String horizontalLine = new String(new char[boxWidth]).replace("\0", "_");
+        String horizontalLine = new String(new char[boxWidth+1]).replace("\0", "_");
         pt.moveTo(x-boxWidth/2, y - (boxHeight/2));
         System.out.print(horizontalLine);
         pt.moveTo(x-boxWidth/2, y + (boxHeight/2-1));
@@ -87,6 +97,9 @@ public class Printer {
             if (count >= amount) break;
             System.out.println(name + ": " + topScore.get(name));
             }
-        
     }
+    public Integer getCorrectAnswer(){
+        return correctAnswer;
+    }
+
 }
