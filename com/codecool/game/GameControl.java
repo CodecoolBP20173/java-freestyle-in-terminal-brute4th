@@ -17,13 +17,19 @@ public class GameControl {
 
         ArrayList<HashMap<String, String>> questions = read.questions();
         ArrayList<Integer> questionOrder = randNumberList(numberOfQuestions);
-        System.out.println(questionOrder);
 
         for (int num : questionOrder) {
             int userInput;
-            System.out.println(num);
             pr.displayQuestionsAnswers(questions.get(num));
             userInput = consoleInputStream.askInputInt(" Select option: ");
+            int solution = pr.getCorrectAnswer();
+            if(userInput == solution){
+                //placeholder
+                System.out.println("telibe");
+            } else {
+                //placeholder
+                System.out.println(":(");
+            }
         }
             
     }

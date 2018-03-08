@@ -12,6 +12,8 @@ public class Printer {
     //terminal command: tput lines
     int lines=52;
 
+    int correctAnswer;
+
     public void displayQuestionsAnswers(HashMap hm){
         String question = hm.get("question").toString();
         String answer1 = hm.get("a1").toString();
@@ -25,6 +27,8 @@ public class Printer {
         randomOrderList.add(answer3);
         randomOrderList.add(answer4);
         Collections.shuffle(randomOrderList);
+
+        correctAnswer = randomOrderList.indexOf(answer4) + 1;
 
         int refX=(cols/2);
         int refY=lines-15;
@@ -82,5 +86,9 @@ public class Printer {
             System.out.println("|");
             pt.moveCursor("C", x + boxWidth/2-1);
         }
+    }
+
+    public Integer getCorrectAnswer(){
+        return correctAnswer;
     }
 }
