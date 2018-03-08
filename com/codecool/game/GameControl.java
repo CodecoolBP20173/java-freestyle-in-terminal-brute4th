@@ -40,17 +40,28 @@ public class GameControl {
 
         ArrayList<HashMap<String, String>> questions = read.questions();
         ArrayList<Integer> questionOrder = randNumberList(numberOfQuestions);
-         
-        for (int num : questionOrder) {
+
+        for (int num = 0; num < questionOrder.size()-1; num++) {
             int userInput;
             pr.displayQuestionsAnswers(questions.get(num), false);
             userInput = consoleInputStream.askInputInt(" Select option: ");
-            if (userInput == 5) {
+
+            if (userInput == 6) {
+                pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), false);
+                userInput = consoleInputStream.askInputInt(" Select option: ");
+                    if (userInput == 5) {
+                        updateScore(-20);
+                        toggleHelpHalving();
+                        pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), true);
+                        userInput = consoleInputStream.askInputInt(" Select option: ");
+                        }    
+            } else if (userInput == 5) {
                 updateScore(-20);
                 toggleHelpHalving();
                 pr.displayQuestionsAnswers(questions.get(num), true);
                 userInput = consoleInputStream.askInputInt(" Select option: ");
-                }
+            }
+
             int solution = pr.getCorrectAnswer();
             if(userInput == solution){
                 updateScore(100);
@@ -84,7 +95,7 @@ public class GameControl {
             list.add(new Integer(i));
         }
         Collections.shuffle(list);
-        ArrayList<Integer> result = new ArrayList<Integer>(list.subList(0, 5));
+        ArrayList<Integer> result = new ArrayList<Integer>(list.subList(0, 6));
         return result;
     }
 
