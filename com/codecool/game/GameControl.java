@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class GameControl {
 
-    int numberOfQuestions=6;
+    int numberOfQuestions=11;
     String[] filenames = {"dance"};
     int[] heights = {3};
     int[] frames = {24};
@@ -39,9 +39,9 @@ public class GameControl {
                 a.AnswerAnimation(filenames[index], heights[index], frames[index], sleep[index], x[index], y[index]);
                 TimeUnit.SECONDS.sleep(1);
             } else {
-                //placeholder
                 term.clearScreen();
-                drawer.printTextArt(70, 15, ": (", AsciiDrawer.ART_SIZE_HUGE);
+                Animation a = new Animation();
+                a.AnswerAnimation("fail", 8, 9, 400, 0, 30);
                 TimeUnit.SECONDS.sleep(3);
             }
         }
