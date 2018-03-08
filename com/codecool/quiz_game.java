@@ -9,8 +9,9 @@ import java.util.*;
 
 
 
+
 public class quiz_game {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         Menu HomeScreen = new Menu();
         HomeScreen.handleMainMenu();
         /*
@@ -29,6 +30,7 @@ public class quiz_game {
         System.out.println(questions.get(0));
         */
         GameControl controller = new GameControl();
+
         switch(HomeScreen.getOption()){
             case 1:
                 controller.mainGame();

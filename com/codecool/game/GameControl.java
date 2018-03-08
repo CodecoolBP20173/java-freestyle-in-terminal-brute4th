@@ -13,6 +13,7 @@ public class GameControl {
         ReadFile read = new ReadFile();
         Printer pr = new Printer();
         ConsoleIn consoleInputStream = new ConsoleIn();
+        Score score = new Score();
 
 
         ArrayList<HashMap<String, String>> questions = read.questions();
@@ -26,6 +27,7 @@ public class GameControl {
             if(userInput == solution){
                 //placeholder
                 System.out.println("telibe");
+                score.countScore(20);
 
             } else {
                 //placeholder
