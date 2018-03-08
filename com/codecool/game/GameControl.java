@@ -11,6 +11,7 @@ public class GameControl {
 
     int numberOfQuestions=6;
     public static boolean helpHalving = true;
+    public static Integer playerScore = 0;
     
     String[] filenames = {"dance", "narwhal"};
     int[] heights = {3, 15};
@@ -34,24 +35,28 @@ public class GameControl {
             pr.displayQuestionsAnswers(questions.get(num), false);
             userInput = consoleInputStream.askInputInt(" Select option: ");
             if (userInput == 5) {
+                updateScore(-20);
                 toggleHelpHalving();
                 pr.displayQuestionsAnswers(questions.get(num), true);
                 userInput = consoleInputStream.askInputInt(" Select option: ");
                 }
             int solution = pr.getCorrectAnswer();
             if(userInput == solution){
+                updateScore(100);
                 int index = new Random().nextInt(filenames.length);
                 term.clearScreen();
                 Animation a = new Animation();
                 a.AnswerAnimation(filenames[index], heights[index], frames[index], sleep[index], x[index], y[index]);
                 TimeUnit.SECONDS.sleep(1);
             } else {
+                updateScore(-50);
                 term.clearScreen();
                 Animation a = new Animation();
                 a.AnswerAnimation("fail", 8, 9, 400, 0, 30);
                 TimeUnit.SECONDS.sleep(3);
             }
         }
+        //save score here!!!
             
     }
 
@@ -71,5 +76,13 @@ public class GameControl {
 
     public void toggleHelpHalving(){
         helpHalving = !helpHalving;
+    }
+
+    public void updateScore(Integer points){
+        playerScore += points;
+    }
+
+    public Integer getScore(){
+        return playerScore;
     }
 }

@@ -19,12 +19,18 @@ public class Printer {
     int correctAnswer;
 
     public void displayQuestionsAnswers(HashMap hm, boolean halving) throws Exception{
+        Terminal pt = new Terminal();
+        GameControl gc = new GameControl();
+        AsciiDrawer drawer = new AsciiDrawer();
+        
+        //Read question and answers
         String question = hm.get("question").toString();
         String answer1 = hm.get("a1").toString();
         String answer2 = hm.get("a2").toString();
         String answer3 = hm.get("a3").toString();
         String answer4 = hm.get("aGood").toString();
 
+        //randomize answers
         ArrayList<String> randomOrderList = new ArrayList<String>();
         if (!halving) {
         randomOrderList.add(answer1);
@@ -36,10 +42,10 @@ public class Printer {
         Collections.shuffle(randomOrderList);
         correctAnswer = randomOrderList.indexOf(answer4) + 1;
 
+        //display Q&A
         int refX=(cols/2) - 15;
         int refY=lines-15;
 
-        Terminal pt = new Terminal();
         pt.clearScreen();
         displayLogo();
         pt.moveTo(refX -(question.length()/2), refY);
@@ -60,8 +66,7 @@ public class Printer {
         drawBox(refX -30, refY + 13, "small");
         drawBox(refX +30, refY + 13, "small");
 
-        GameControl gc = new GameControl();
-        AsciiDrawer drawer = new AsciiDrawer();
+        //display help options
         boolean checkHelpHalving = gc.getHelpHalving();
         if (checkHelpHalving){
             pt.moveTo(140, 29);
@@ -78,6 +83,11 @@ public class Printer {
             drawer.printTextArt(140, 33, "50 :50", AsciiDrawer.ART_SIZE_SMALL);
         }
 
+        //display score
+        Integer playerScore = gc.getScore();
+        pt.moveTo(160, 3);
+        System.out.print("Score: " + playerScore.toString());
+        
         pt.moveTo(0, lines); 
     }
 
