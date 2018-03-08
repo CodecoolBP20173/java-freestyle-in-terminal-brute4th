@@ -9,19 +9,20 @@ import java.util.Random;
 
 public class GameControl {
     
-    Printer pr = new Printer();
+    public Printer pr = new Printer();
     
     public static boolean helpHalving = true;
     public static Integer playerScore = 0;
+    
+    String[] filenames = {"dance", "narwhal.1", "narwhal.2", "narwhal.3"};
+    int[] heights = {3, 15, 15, 15};
+    int[] frames = {24, 13, 13, 28};
+    int[] sleep = {150, 150, 150, 150};
+    int[] x = {0, 65, 65, 65};
+    int[] y = {30, 30, 30, 30};
     int numberOfQuestions=6;
     public static String username = "";    
-    String[] filenames = {"dance", "narwhal"};
-    int[] heights = {3, 15};
-    int[] frames = {24, 52};
-    int[] sleep = {150, 150};
-    int[] x = {0, 65};
-    int[] y = {30, 30};
-    
+
     public String welcomePage() {
         username = pr.displayWelcomePage();
         return username;
@@ -80,8 +81,12 @@ public class GameControl {
         WriteFile save = new WriteFile();
         save.saveScore(username, playerScore);
 
-        //save score here!!!
+        endScreen();
             
+    }
+
+    public void endScreen()  throws Exception{
+        pr.displayEndScreen(username, playerScore);
     }
 
     public ArrayList<Integer> randNumberList(int numberOfQuestions){
