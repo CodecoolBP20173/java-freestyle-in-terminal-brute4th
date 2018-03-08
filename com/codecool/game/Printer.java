@@ -106,4 +106,11 @@ public class Printer {
         return correctAnswer;
     }
 
+    public void printTimer(int time){
+        Terminal pt = new Terminal();
+        pt.moveTo(150, 10);
+        System.out.println(" "+ time + " ");
+        pt.moveTo(17, lines);
+    }
+
 }

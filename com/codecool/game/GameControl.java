@@ -24,21 +24,23 @@ public class GameControl {
 
         for (int num : questionOrder) {
             
-            int i = 60; 
+            int timer = 20; 
             Integer userInput = 0;
             pr.displayQuestionsAnswers(questions.get(num), false);
             System.out.println(" Select option: ");
             while (true) {
                 try {
-                    System.out.println(i--);
+                    pr.printTimer(timer--);
                     Thread.sleep(1_000);
                 } catch (InterruptedException e) {
                     System.out.println("Interrupted");
                     break;                
-                }       
-                
-                
+                }      
                 userInput = consoleInputStream.askAnswerInt();
+                if (timer <= 0) {
+                   userInput = 9;
+                   break;
+                }
                 if (userInput != null) {
                     if (userInput >= 1 && userInput <= 6) {
                         break;
