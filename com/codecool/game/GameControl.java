@@ -74,7 +74,7 @@ public class GameControl {
             
     }
 
-    public void endScreen() {
+    public void endScreen()  throws Exception{
         pr.displayEndScreen(username, playerScore);
     }
 

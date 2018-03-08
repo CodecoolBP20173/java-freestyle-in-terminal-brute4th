@@ -4,8 +4,7 @@ import com.codecool.termlib.Terminal;
 import com.codecool.termlib.Color;
 import com.codecool.termlib.Direction;
 import com.codecool.data_manager.*;
-import com.codecool.game.AsciiDrawer;
-import com.codecool.game.GameControl;
+import com.codecool.game.*;
 
 import java.util.*;
 
@@ -146,7 +145,7 @@ public class Printer {
         }
     }
 
-    public void displayEndScreen(String username, int score){
+    public void displayEndScreen(String username, int score) throws Exception{
         String message = "Congratulation " + username + "! Your score is " + score + ".";
         String back = "Press 1 to go back to the main menu!";
         pt.clearScreen();
@@ -158,6 +157,10 @@ public class Printer {
         drawBox(refX, refY, "large");
         pt.moveTo(refX -(back.length()/2), refY + 6);
         int input = consoleInputStream.askInputInt(back);
+        Menu HomeScreen = new Menu();
+        if (input == 1) {
+            HomeScreen.handleMainMenu();
+        }
     }    
 
     public void displayTopScore(int amount) throws Exception {
