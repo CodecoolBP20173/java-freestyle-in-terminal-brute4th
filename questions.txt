@@ -34,3 +34,33 @@ final
 elsif
 repeat
 select
+
+How cool is CodeCool?
+The coolest
+Very cool
+Really cool
+Simply cool
+
+How do you revert a commit that has already been pushed and made public?
+git revert HEAD~2..HEAD
+git revert
+git revert HEAD~2
+git hard revert HEAD
+
+Which is NOT a GIT client?
+Git Coke
+Git Cola
+Git-g
+Smart git
+
+Which is NOT a GIT repository hosting service?
+Git for Enterprises
+Pikacode
+GitHub
+Visual Studio Online
+
+Who was the painter of the picture above?
+Michelangelo di Lodovico Buonarroti Simoni
+Micheal Angelo
+Michel Angelino
+Michelangelo di Ludovico Buenarroti
