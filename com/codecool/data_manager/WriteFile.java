@@ -13,10 +13,10 @@ public class WriteFile {
 		FileWriter fw = null;
 
 		try {
-			Random rand = new Random();
-			int n = rand.nextInt(1000) + 1;	
+			//Random rand = new Random();
+			//int n = rand.nextInt(1000) + 1;	
 
-			String data = "\n" + name + "_" + n + "\n" + score;
+			String data = "\n" + name + "\n" + score;
 
 			File file = new File(FILENAME);
 
