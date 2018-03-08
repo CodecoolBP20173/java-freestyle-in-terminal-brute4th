@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class GameControl {
     
-    Printer pr = new Printer();
+    public Printer pr = new Printer();
     
     public static boolean helpHalving = true;
     public static Integer playerScore = 0;
@@ -18,7 +18,7 @@ public class GameControl {
     String[] filenames = {"dance", "narwhal"};
     int[] heights = {3, 15};
     int[] frames = {24, 52};
-    int[] sleep = {150, 150};
+    int[] sleep = {150, 100};
     int[] x = {0, 65};
     int[] y = {30, 30};
     
@@ -69,8 +69,12 @@ public class GameControl {
         WriteFile save = new WriteFile();
         save.saveScore(username, playerScore);
 
-        //save score here!!!
+        endScreen();
             
+    }
+
+    public void endScreen() {
+        pr.displayEndScreen(username, playerScore);
     }
 
     public ArrayList<Integer> randNumberList(int numberOfQuestions){
