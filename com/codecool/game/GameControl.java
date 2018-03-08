@@ -24,8 +24,12 @@ public class GameControl {
 
         for (int num : questionOrder) {
             int userInput;
-            pr.displayQuestionsAnswers(questions.get(num));
+            pr.displayQuestionsAnswers(questions.get(num), false);
             userInput = consoleInputStream.askInputInt(" Select option: ");
+            if (userInput == 5) {
+                pr.displayQuestionsAnswers(questions.get(num), true);
+                userInput = consoleInputStream.askInputInt(" Select option: ");
+                }
             int solution = pr.getCorrectAnswer();
             if(userInput == solution){
                 //placeholder

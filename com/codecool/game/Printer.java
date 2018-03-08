@@ -15,7 +15,7 @@ public class Printer {
 
     int correctAnswer;
 
-    public void displayQuestionsAnswers(HashMap hm){
+    public void displayQuestionsAnswers(HashMap hm, boolean halving){
         String question = hm.get("question").toString();
         String answer1 = hm.get("a1").toString();
         String answer2 = hm.get("a2").toString();
@@ -23,12 +23,14 @@ public class Printer {
         String answer4 = hm.get("aGood").toString();
 
         ArrayList<String> randomOrderList = new ArrayList<String>();
+        if (halving == false) {
         randomOrderList.add(answer1);
         randomOrderList.add(answer2);
+        }
         randomOrderList.add(answer3);
         randomOrderList.add(answer4);
+        
         Collections.shuffle(randomOrderList);
-
         correctAnswer = randomOrderList.indexOf(answer4) + 1;
 
         int refX=(cols/2);
@@ -42,10 +44,12 @@ public class Printer {
         System.out.print("1. " + randomOrderList.get(0));
         pt.moveTo(refX + 15, refY + 6);
         System.out.print("2. " + randomOrderList.get(1));
+        if (halving == false) {
         pt.moveTo(refX - 45, refY + 13);
         System.out.print("3. " + randomOrderList.get(2));
         pt.moveTo(refX + 15, refY + 13);
         System.out.println("4. " + randomOrderList.get(3));
+        }
         drawBox(refX, refY, "large");
         drawBox(refX -30, refY + 6, "small");
         drawBox(refX +30, refY + 6, "small");
