@@ -10,12 +10,12 @@ import java.util.Random;
 public class GameControl {
 
     int numberOfQuestions=6;
-    String[] filenames = {"dance"};
-    int[] heights = {3};
-    int[] frames = {24};
-    int[] sleep = {150};
-    int[] x = {0};
-    int[] y = {30};
+    String[] filenames = {"dance", "narwhal"};
+    int[] heights = {3, 15};
+    int[] frames = {24, 52};
+    int[] sleep = {150, 150};
+    int[] x = {0, 65};
+    int[] y = {30, 30};
 
     public void mainGame() throws Exception{
         ReadFile read = new ReadFile();
