@@ -1,5 +1,6 @@
 package com.codecool.data_manager;
 
+import java.util.Random;
 import java.io.*;
 
 public class WriteFile {
@@ -12,8 +13,10 @@ public class WriteFile {
 		FileWriter fw = null;
 
 		try {
+			Random rand = new Random();
+			int n = rand.nextInt(1000) + 1;	
 
-			String data = "\n" + name + "\n" + score;
+			String data = "\n" + name + "_" + n + "\n" + score;
 
 			File file = new File(FILENAME);
 
@@ -27,8 +30,6 @@ public class WriteFile {
 			bw = new BufferedWriter(fw);
 
 			bw.write(data);
-
-			System.out.println("Done");
 
 		} catch (IOException e) {
 			e.printStackTrace();

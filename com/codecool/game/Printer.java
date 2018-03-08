@@ -2,6 +2,7 @@ package com.codecool.game;
 
 import com.codecool.termlib.Terminal;
 import com.codecool.termlib.Direction;
+import com.codecool.data_manager.*;
 
 import java.util.*;
 
@@ -88,7 +89,17 @@ public class Printer {
         }
     }
 
+    public void displayTopScore(int amount) {
+        ReadFile read = new ReadFile();
+        Map<String, Integer> topScore = read.getScore();
+        int count = 0;
+        for (String name : topScore.keySet()) {
+            if (count >= amount) break;
+            System.out.println(name + ": " + topScore.get(name));
+            }
+    }
     public Integer getCorrectAnswer(){
         return correctAnswer;
     }
+
 }

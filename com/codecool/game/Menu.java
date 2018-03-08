@@ -1,7 +1,7 @@
 package com.codecool.game;
 
-import com.codecool.game.ConsoleIn;
-import com.codecool.termlib.Terminal;;
+import com.codecool.game.*;
+import com.codecool.termlib.*;
 
 public class Menu {
 
@@ -38,6 +38,8 @@ public class Menu {
             break;
             case 2:
             System.out.println("Option 2 selected");
+            Score show = new Score();
+            show.handleScore();
             option=2;
             exit = true;
             break;
