@@ -36,6 +36,22 @@ public class ConsoleIn {
 		return userInp.charAt(0);
 	}
 
+	public String askInputString(String informationText) {
+		Boolean error = false;
+		String userInp = "";
+		do {
+			System.out.print(informationText);
+			userInp = keyboard.nextLine();
+			if (!isType(userInp, "string")) {
+				error = true;
+				System.err.println("Error: must be a string.");
+			} else {
+				error = false;
+			}
+		} while (error == true);
+		return userInp;
+	}
+
     public Boolean isType(String testStr, String type) {
 		try {
 			if (type.equalsIgnoreCase("char")) {
@@ -43,7 +59,10 @@ public class ConsoleIn {
 			} else if (type.equalsIgnoreCase("int")) {
 				Integer.parseInt(testStr);
 			} 
-			 return true;
+			else if (type.equalsIgnoreCase("string")) {
+				return true;
+			} 
+			return true;
 		} catch(Exception e) {
 			return false;
 		}

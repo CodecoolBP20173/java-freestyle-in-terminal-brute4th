@@ -34,6 +34,7 @@ public class quiz_game {
 
         switch(HomeScreen.getOption()){
             case 1:
+                String username = controller.welcomePage();
                 controller.mainGame();
                 break;
             case 2:

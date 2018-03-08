@@ -8,8 +8,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.Random;
 
 public class GameControl {
-
-    int numberOfQuestions=6;
+    
+    public Printer pr = new Printer();
+    
     public static boolean helpHalving = true;
     public static Integer playerScore = 0;
     
@@ -19,17 +20,27 @@ public class GameControl {
     int[] sleep = {150, 150, 150, 150};
     int[] x = {0, 65, 65, 65};
     int[] y = {30, 30, 30, 30};
+    int numberOfQuestions=6;
+    public static String username = "";    
+
+    public String welcomePage() {
+        username = pr.displayWelcomePage();
+        return username;
+    }
+
+    public String getUsername(){
+        return username;
+    }
 
     public void mainGame() throws Exception{
         ReadFile read = new ReadFile();
-        Printer pr = new Printer();
         ConsoleIn consoleInputStream = new ConsoleIn();
         Terminal term = new Terminal();
         AsciiDrawer drawer = new AsciiDrawer();
 
         ArrayList<HashMap<String, String>> questions = read.questions();
         ArrayList<Integer> questionOrder = randNumberList(numberOfQuestions);
-
+         
         for (int num : questionOrder) {
             int userInput;
             pr.displayQuestionsAnswers(questions.get(num), false);
@@ -56,8 +67,15 @@ public class GameControl {
                 TimeUnit.SECONDS.sleep(3);
             }
         }
-        //save score here!!!
+        WriteFile save = new WriteFile();
+        save.saveScore(username, playerScore);
+
+        endScreen();
             
+    }
+
+    public void endScreen() {
+        pr.displayEndScreen(username, playerScore);
     }
 
     public ArrayList<Integer> randNumberList(int numberOfQuestions){
@@ -68,6 +86,11 @@ public class GameControl {
         Collections.shuffle(list);
         ArrayList<Integer> result = new ArrayList<Integer>(list.subList(0, 5));
         return result;
+    }
+
+    public void setUser(){
+        ConsoleIn consoleInputStream = new ConsoleIn();
+        username = consoleInputStream.askInputString(" Type your name: ");
     }
 
     public boolean getHelpHalving(){
