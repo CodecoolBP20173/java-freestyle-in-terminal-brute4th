@@ -21,6 +21,7 @@ public class GameControl {
     int[] sleep = {150, 150};
     int[] x = {0, 65};
     int[] y = {30, 30};
+    private int timer = 20;
     
     public String welcomePage() {
         username = pr.displayWelcomePage();
@@ -42,48 +43,28 @@ public class GameControl {
 
         for (int num = 0; num < questionOrder.size()-1; num++) {
             
-            int timer = 20; 
-            Integer userInput = 0;
+            
             pr.displayQuestionsAnswers(questions.get(num), false);
             System.out.println(" Select option: ");
-            while (true) {
-                try {
-                    pr.printTimer(timer--);
-                    Thread.sleep(1_000);
-                } catch (InterruptedException e) {
-                    System.out.println("Interrupted");
-                    break;                
-                }      
-                userInput = consoleInputStream.askAnswerInt();
-                if (timer <= 0) {
-                   userInput = 9;
-                   break;
-                }
-                if (userInput != null) {
-                    if (userInput >= 1 && userInput <= 6) {
-                        break;
-                    } else {
-                    //System.out.println(userInput);
-                    }
-                }
-            }
-
+            Integer userInput = waitInput(true);
             if (userInput == 6) {
                 pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), false);
-                userInput = consoleInputStream.askAnswerInt();
+                System.out.println(" Select option: ");
+                userInput = waitInput(true);
                     if (userInput == 5) {
                         updateScore(-20);
                         toggleHelpHalving();
                         pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), true);
-                        userInput = consoleInputStream.askAnswerInt();
+                        userInput = waitInput(false);
                         }    
-            } else if (userInput == 5) {
+            }
+            if (userInput == 5) {
                 updateScore(-20);
                 toggleHelpHalving();
                 pr.displayQuestionsAnswers(questions.get(num), true);
-                userInput = consoleInputStream.askAnswerInt();
+                userInput = waitInput(false);
             }
-            int solution = pr.getCorrectAnswer();
+            Integer solution = pr.getCorrectAnswer();
             if(userInput == solution){
                 updateScore(100);
                 int index = new Random().nextInt(filenames.length);
@@ -137,4 +118,30 @@ public class GameControl {
     public Integer getScore(){
         return playerScore;
     }
-}
+
+    public Integer waitInput(boolean newTimer) {
+        if (newTimer == true) {
+            timer = 20;
+        }
+        ConsoleIn consoleInputStream = new ConsoleIn();  
+        Integer userInput = 0;
+        while (true) {
+            try {
+                pr.printTimer(timer--);
+                Thread.sleep(1_000);
+            } catch (InterruptedException e) {
+                System.out.println("Interrupted");
+                break;                
+            }      
+            userInput = consoleInputStream.askAnswerInt();
+            if (timer <= 0) {
+                userInput = 9;
+                break;
+            }
+            if (userInput != null && userInput >= 1 && userInput <= 6) {
+                break;
+            }
+        }    
+        return userInput;
+    }    
+}        

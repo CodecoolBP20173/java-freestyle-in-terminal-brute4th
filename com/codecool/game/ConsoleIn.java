@@ -37,7 +37,7 @@ public class ConsoleIn {
                 Integer n = new Integer(str.trim());
                 return n.intValue();
             }    
-        } catch (IOException e) {
+        } catch (IOException |NumberFormatException e) {
             System.err.println("Error " + e.getMessage());
         }
         return null;
