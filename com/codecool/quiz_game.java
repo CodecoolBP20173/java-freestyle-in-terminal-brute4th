@@ -10,11 +10,13 @@ import java.util.*;
 
 
 
+
 public class quiz_game {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         Menu HomeScreen = new Menu();
         HomeScreen.handleMainMenu();
         GameControl controller = new GameControl();
+
         switch(HomeScreen.getOption()){
             case 1:
                 controller.mainGame();
