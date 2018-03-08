@@ -8,17 +8,20 @@ import java.util.concurrent.TimeUnit;
 import java.util.Random;
 
 public class GameControl {
-
-    int numberOfQuestions=6;
-    String[] filenames = {"dance"};
-    int[] heights = {3};
-    int[] frames = {24};
-    int[] sleep = {150};
-    int[] x = {0};
-    int[] y = {30};
-    String username = "";
+    
     Printer pr = new Printer();
-
+    
+    public static boolean helpHalving = true;
+    public static Integer playerScore = 0;
+    int numberOfQuestions=6;
+    String username = "";
+    String[] filenames = {"dance", "narwhal"};
+    int[] heights = {3, 15};
+    int[] frames = {24, 52};
+    int[] sleep = {150, 150};
+    int[] x = {0, 65};
+    int[] y = {30, 30};
+    
     public String welcomePage() {
         username = pr.displayWelcomePage();
         return username;
@@ -38,24 +41,30 @@ public class GameControl {
             pr.displayQuestionsAnswers(questions.get(num), false);
             userInput = consoleInputStream.askInputInt(" Select option: ");
             if (userInput == 5) {
+                updateScore(-20);
+                toggleHelpHalving();
                 pr.displayQuestionsAnswers(questions.get(num), true);
                 userInput = consoleInputStream.askInputInt(" Select option: ");
                 }
             int solution = pr.getCorrectAnswer();
             if(userInput == solution){
+                updateScore(100);
                 int index = new Random().nextInt(filenames.length);
                 term.clearScreen();
                 Animation a = new Animation();
                 a.AnswerAnimation(filenames[index], heights[index], frames[index], sleep[index], x[index], y[index]);
                 TimeUnit.SECONDS.sleep(1);
             } else {
-                //placeholder
+                updateScore(-50);
                 term.clearScreen();
-                drawer.printTextArt(70, 15, ": (", AsciiDrawer.ART_SIZE_HUGE);
+                Animation a = new Animation();
+                a.AnswerAnimation("fail", 8, 9, 400, 0, 30);
                 TimeUnit.SECONDS.sleep(3);
             }
         }
-           
+        WriteFile save = new WriteFile();
+        save.saveScore(username, playerScore);
+
     }
 
     public ArrayList<Integer> randNumberList(int numberOfQuestions){
@@ -73,4 +82,19 @@ public class GameControl {
         username = consoleInputStream.askInputString(" Type your name: ");
     }
 
+    public boolean getHelpHalving(){
+        return helpHalving;
+    }
+
+    public void toggleHelpHalving(){
+        helpHalving = !helpHalving;
+    }
+
+    public void updateScore(Integer points){
+        playerScore += points;
+    }
+
+    public Integer getScore(){
+        return playerScore;
+    }
 }
