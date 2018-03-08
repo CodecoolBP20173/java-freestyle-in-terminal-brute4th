@@ -14,7 +14,7 @@ public class GameControl {
     public static boolean helpHalving = true;
     public static Integer playerScore = 0;
     int numberOfQuestions=6;
-    String username = "";
+    String username = "";    
     String[] filenames = {"dance", "narwhal"};
     int[] heights = {3, 15};
     int[] frames = {24, 52};
@@ -65,6 +65,8 @@ public class GameControl {
         WriteFile save = new WriteFile();
         save.saveScore(username, playerScore);
 
+        //save score here!!!
+            
     }
 
     public ArrayList<Integer> randNumberList(int numberOfQuestions){

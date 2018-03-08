@@ -5,6 +5,7 @@ import com.codecool.termlib.Color;
 import com.codecool.termlib.Direction;
 import com.codecool.data_manager.*;
 import com.codecool.game.AsciiDrawer;
+import com.codecool.game.GameControl;
 
 import java.util.*;
 
@@ -36,15 +37,21 @@ public class Printer {
         return username;
     }
 
-    public void displayQuestionsAnswers(HashMap hm, boolean halving){
+    public void displayQuestionsAnswers(HashMap hm, boolean halving) throws Exception{
+        Terminal pt = new Terminal();
+        GameControl gc = new GameControl();
+        AsciiDrawer drawer = new AsciiDrawer();
+        
+        //Read question and answers
         String question = hm.get("question").toString();
         String answer1 = hm.get("a1").toString();
         String answer2 = hm.get("a2").toString();
         String answer3 = hm.get("a3").toString();
         String answer4 = hm.get("aGood").toString();
 
+        //randomize answers
         ArrayList<String> randomOrderList = new ArrayList<String>();
-        if (halving == false) {
+        if (!halving) {
         randomOrderList.add(answer1);
         randomOrderList.add(answer2);
         }
@@ -54,7 +61,10 @@ public class Printer {
         Collections.shuffle(randomOrderList);
         correctAnswer = randomOrderList.indexOf(answer4) + 1;
 
-        Terminal pt = new Terminal();
+        //display Q&A
+        int refX=(cols/2) - 15;
+        int refY=lines-15;
+
         pt.clearScreen();
         displayLogo();
         pt.moveTo(refX -(question.length()/2), refY);
@@ -75,6 +85,28 @@ public class Printer {
         drawBox(refX -30, refY + 13, "small");
         drawBox(refX +30, refY + 13, "small");
 
+        //display help options
+        boolean checkHelpHalving = gc.getHelpHalving();
+        if (checkHelpHalving){
+            pt.moveTo(140, 29);
+            pt.setUnderline("Available help: ");
+            pt.resetStyle();
+        } else {
+            pt.moveTo(150, 38);
+            System.out.print("No more help.");
+        }
+
+        if(checkHelpHalving){
+            pt. moveTo(140, 31);
+            System.out.print("Press 5: ");
+            drawer.printTextArt(140, 33, "50 :50", AsciiDrawer.ART_SIZE_SMALL);
+        }
+
+        //display score
+        Integer playerScore = gc.getScore();
+        pt.moveTo(160, 3);
+        System.out.print("Score: " + playerScore.toString());
+        
         pt.moveTo(0, lines); 
     }
 
