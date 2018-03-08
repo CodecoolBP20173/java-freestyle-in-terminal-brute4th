@@ -9,7 +9,7 @@ public class Menu {
 
     public void printMainMenu() {
         Animation menu = new Animation();
-        menu.MainMenu(17,30);
+        menu.MainMenu(17,40);
     }
     
     public void handleMainMenu() throws Exception {
