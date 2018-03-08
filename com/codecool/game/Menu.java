@@ -8,18 +8,8 @@ public class Menu {
     private int option;
 
     public void printMainMenu() {
-        Terminal term = new Terminal();
-        term.clearScreen();
-
-        System.out.println("============================");
-        System.out.println("|        QUIZ  GAME        |");
-        System.out.println("============================");
-        System.out.println("| Options:                 |");
-        System.out.println("|        1. New Game       |");
-        System.out.println("|        2. High Scores    |");
-        System.out.println("|        3. Credits        |");
-        System.out.println("|        4. Exit           |");
-        System.out.println("============================");
+        Animation menu = new Animation();
+        menu.MainMenu(17,30);
     }
     
     public void handleMainMenu() throws Exception {
