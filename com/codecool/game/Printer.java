@@ -3,8 +3,7 @@ package com.codecool.game;
 import com.codecool.termlib.Terminal;
 import com.codecool.termlib.Direction;
 
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.*;
 
 public class Printer {
 
@@ -20,6 +19,13 @@ public class Printer {
         String answer3 = hm.get("a3").toString();
         String answer4 = hm.get("aGood").toString();
 
+        ArrayList<String> randomOrderList = new ArrayList<String>();
+        randomOrderList.add(answer1);
+        randomOrderList.add(answer2);
+        randomOrderList.add(answer3);
+        randomOrderList.add(answer4);
+        Collections.shuffle(randomOrderList);
+
         int refX=(cols/2);
         int refY=lines-15;
 
@@ -28,13 +34,13 @@ public class Printer {
         pt.moveTo(refX -(question.length()/2), refY);
         System.out.print(question);
         pt.moveTo(refX - 35, refY + 6);
-        System.out.print("1. " + answer1);
+        System.out.print("1. " + randomOrderList.get(0));
         pt.moveTo(refX + 35, refY + 6);
-        System.out.print("2. " + answer2);
+        System.out.print("2. " + randomOrderList.get(1));
         pt.moveTo(refX - 35, refY + 13);
-        System.out.print("3. " + answer3);
+        System.out.print("3. " + randomOrderList.get(2));
         pt.moveTo(refX + 35, refY + 13);
-        System.out.println("4. " + answer4);
+        System.out.println("4. " + randomOrderList.get(3));
         drawBox(refX, refY, "large");
         drawBox(refX -35, refY + 6, "small");
         drawBox(refX +35, refY + 6, "small");
