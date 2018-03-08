@@ -23,12 +23,33 @@ public class GameControl {
         ArrayList<Integer> questionOrder = randNumberList(numberOfQuestions);
 
         for (int num : questionOrder) {
-            int userInput;
+            
+            int i = 60; 
+            Integer userInput = 0;
             pr.displayQuestionsAnswers(questions.get(num), false);
-            userInput = consoleInputStream.askInputInt(" Select option: ");
+            System.out.println(" Select option: ");
+            while (true) {
+                try {
+                    System.out.println(i--);
+                    Thread.sleep(1_000);
+                } catch (InterruptedException e) {
+                    System.out.println("Interrupted");
+                    break;                
+                }       
+                
+                
+                userInput = consoleInputStream.askAnswerInt();
+                if (userInput != null) {
+                    if (userInput >= 1 && userInput <= 6) {
+                        break;
+                    } else {
+                    //System.out.println(userInput);
+                    }
+                }
+            }
             if (userInput == 5) {
                 pr.displayQuestionsAnswers(questions.get(num), true);
-                userInput = consoleInputStream.askInputInt(" Select option: ");
+                userInput = consoleInputStream.askAnswerInt();
                 }
             int solution = pr.getCorrectAnswer();
             if(userInput == solution){
@@ -58,3 +79,4 @@ public class GameControl {
         return result;
     }
 }
+ 
