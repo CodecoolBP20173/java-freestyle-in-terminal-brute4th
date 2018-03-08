@@ -106,6 +106,11 @@ public class Printer {
         Integer playerScore = gc.getScore();
         pt.moveTo(160, 3);
         System.out.print("Score: " + playerScore.toString());
+
+        //display name
+        String username = gc.getUsername();
+        pt.moveTo(140, 3);
+        System.out.print("Player: " + username);
         
         pt.moveTo(0, lines); 
     }

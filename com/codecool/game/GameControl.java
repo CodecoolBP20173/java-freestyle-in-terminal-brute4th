@@ -14,7 +14,7 @@ public class GameControl {
     public static boolean helpHalving = true;
     public static Integer playerScore = 0;
     int numberOfQuestions=6;
-    String username = "";    
+    public static String username = "";    
     String[] filenames = {"dance", "narwhal"};
     int[] heights = {3, 15};
     int[] frames = {24, 52};
@@ -24,6 +24,10 @@ public class GameControl {
     
     public String welcomePage() {
         username = pr.displayWelcomePage();
+        return username;
+    }
+
+    public String getUsername(){
         return username;
     }
 
