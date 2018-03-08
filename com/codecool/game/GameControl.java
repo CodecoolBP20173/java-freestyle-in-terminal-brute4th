@@ -31,11 +31,14 @@ public class GameControl {
                 //placeholder
                 //System.out.println("telibe");
                 //term.moveTo(10, 10);
-                drawer.printTextArt("TELIBE", AsciiDrawer.ART_SIZE_MEDIUM);
+                term.clearScreen();
+                drawer.printTextArt(30, 20, "TELIBE", AsciiDrawer.ART_SIZE_HUGE);
                 TimeUnit.SECONDS.sleep(3);
             } else {
                 //placeholder
-                System.out.println(":(");
+                term.clearScreen();
+                drawer.printTextArt(70, 15, ": (", AsciiDrawer.ART_SIZE_HUGE);
+                TimeUnit.SECONDS.sleep(3);
             }
         }
             

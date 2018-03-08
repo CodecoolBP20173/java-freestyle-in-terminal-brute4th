@@ -6,6 +6,8 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import com.codecool.termlib.Terminal;
+import com.codecool.termlib.Direction;
 
 /**
  * ASCII Art Generator in Java. 
@@ -41,13 +43,17 @@ public class AsciiDrawer {
     /**
      * Prints ASCII art for the specified text. For size, you can use predefined sizes or a custom size.
      * Usage - printTextArt("Hi",30,ASCIIArtFont.ART_FONT_SERIF,"@");
+     * @param posX - Starting coordinate on X axis
+     * @param posY - Starting coordinate on Y axis
      * @param artText
      * @param textHeight - Use a predefined size or a custom type
      * @param fontType - Use one of the available fonts
      * @param artSymbol - Specify the character for printing the ascii art
      * @throws Exception
      */
-    public void printTextArt(String artText, int textHeight, ASCIIArtFont fontType, String artSymbol) throws Exception {
+    public void printTextArt(Integer posX, Integer posY, String artText, int textHeight, ASCIIArtFont fontType, String artSymbol) throws Exception {
+        Terminal dt = new Terminal();
+        
         String fontName = fontType.getValue();
         int imageWidth = findImageWidth(textHeight, artText, fontName);
 
@@ -59,7 +65,9 @@ public class AsciiDrawer {
         Graphics2D graphics = (Graphics2D) g;
         graphics.drawString(artText, 0, getBaselinePosition(g, font));
 
+        dt.moveTo(0, posY);
         for (int y = 0; y < textHeight; y++) {
+            dt.moveCursor("C", posX);
             StringBuilder sb = new StringBuilder();
             for (int x = 0; x < imageWidth; x++)
                 sb.append(image.getRGB(x, y) == Color.WHITE.getRGB() ? artSymbol : " ");
@@ -76,8 +84,8 @@ public class AsciiDrawer {
      * @param textHeight
      * @throws Exception
      */
-    public void printTextArt(String artText, int textHeight) throws Exception {
-        printTextArt(artText, textHeight, ASCIIArtFont.ART_FONT_DIALOG, DEFAULT_ART_SYMBOL);
+    public void printTextArt(Integer posX, Integer posY, String artText, int textHeight) throws Exception {
+        printTextArt(posX, posY, artText, textHeight, ASCIIArtFont.ART_FONT_DIALOG, DEFAULT_ART_SYMBOL);
     }
 
     /**
@@ -103,6 +111,6 @@ public class AsciiDrawer {
     private int getBaselinePosition(Graphics g, Font font) {
         FontMetrics metrics = g.getFontMetrics(font);
         int y = metrics.getAscent() - metrics.getDescent();
-        return 2;
+        return y;
     }
 }
