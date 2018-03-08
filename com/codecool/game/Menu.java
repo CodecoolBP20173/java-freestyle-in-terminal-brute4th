@@ -22,17 +22,16 @@ public class Menu {
             userInput = consoleInputStream.askInputInt(" Select option: ");
             switch (userInput) {
             case 1:
-            System.out.println("Option 1 selected");
             option=1;
             exit = true;
             break;
             case 2:
-            System.out.println("Option 2 selected");
             Score show = new Score();
             show.handleScore();
             break;
             case 3:
-            System.out.println("Option 3 selected");
+                Credits credit = new Credits();
+                credit.printCredits();
             break;
             case 4:
             System.out.println("Good bye! See you next time ;)");
