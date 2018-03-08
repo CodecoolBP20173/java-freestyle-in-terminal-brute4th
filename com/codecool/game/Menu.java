@@ -22,7 +22,7 @@ public class Menu {
         System.out.println("============================");
     }
     
-    public void handleMainMenu() {
+    public void handleMainMenu() throws Exception {
         ConsoleIn consoleInputStream = new ConsoleIn();
         int userInput;
         boolean exit = false;

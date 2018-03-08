@@ -29,8 +29,6 @@ public class GameControl {
             int solution = pr.getCorrectAnswer();
             if(userInput == solution){
                 //placeholder
-                //System.out.println("telibe");
-                //term.moveTo(10, 10);
                 term.clearScreen();
                 drawer.printTextArt(30, 20, "TELIBE", AsciiDrawer.ART_SIZE_HUGE);
                 TimeUnit.SECONDS.sleep(3);
