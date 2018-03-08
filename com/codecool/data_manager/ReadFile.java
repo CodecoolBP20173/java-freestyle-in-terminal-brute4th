@@ -7,12 +7,7 @@ public class ReadFile {
     public ArrayList<String> readFile(String file) {
 
         // The name of the file to open.
-        String fileName;
-        if (file == "questions") { 
-            fileName = "questions.txt";
-        } else {
-            fileName = "score.txt";
-        }
+        String fileName = file + ".txt";
 
         // This will reference one line at a time
         String line = null;

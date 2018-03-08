@@ -50,7 +50,7 @@ public class Animation {
     }
 
     public void MainMenu(int height, int frames) {
-        ArrayList<String> menu = txtInput.readFile("main_menu.txt");
+        ArrayList<String> menu = txtInput.readFile("main_menu");
         int index = 0;
         for (int i = 0; i < frames; i++) {
             Terminal term = new Terminal();
