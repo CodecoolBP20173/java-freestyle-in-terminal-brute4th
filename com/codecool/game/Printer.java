@@ -194,6 +194,13 @@ public class Printer {
         return correctAnswer;
     }
 
+    public void printTimer(int time){
+        Terminal pt = new Terminal();
+        pt.moveTo(75, 30);
+        System.out.println(" "+ time + " ");
+        pt.moveTo(17, lines);
+    }
+
     public void displayLogo(){
         ReadFile txtInput = new ReadFile();
         ArrayList<String> logo = txtInput.readFile("logo");

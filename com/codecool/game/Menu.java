@@ -19,7 +19,7 @@ public class Menu {
 
         while (!exit) {
             printMainMenu();
-            userInput = consoleInputStream.askInputInt(" Select option: ");
+            userInput = consoleInputStream.askInputInt (" Select option: ");
             switch (userInput) {
             case 1:
             option=1;

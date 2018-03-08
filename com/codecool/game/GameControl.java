@@ -21,7 +21,9 @@ public class GameControl {
     int[] sleep = {150, 150, 150, 150};
     int[] x = {0, 65, 65, 65};
     int[] y = {30, 30, 30, 30};
+  
     int numberOfQuestions=11;
+    private int timer = 20;
     public static String username = "";    
 
     public String welcomePage() {
@@ -46,27 +48,37 @@ public class GameControl {
             int userInput;
             int num=questionOrder.get(i);
             pr.displayQuestionsAnswers(questions.get(num), false);
-            userInput = consoleInputStream.askInputInt(" Select option: ");
-
+            System.out.println(" Select option: ");
+            Integer userInput = waitInput(true);
             if (userInput == 6) {
                 toggleHelpPass();
                 updateScore(-20);
                 pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), false);
-                userInput = consoleInputStream.askInputInt(" Select option: ");
+                System.out.println(" Select option: ");
+                userInput = waitInput(true);
                     if (userInput == 5) {
                         updateScore(-20);
                         toggleHelpHalving();
                         pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), true);
-                        userInput = consoleInputStream.askInputInt(" Select option: ");
+                        System.out.println(" Select option: ");
+                        userInput = waitInput(false);
                         }    
-            } else if (userInput == 5) {
+            }
+            if (userInput == 5) {
                 updateScore(-20);
                 toggleHelpHalving();
                 pr.displayQuestionsAnswers(questions.get(num), true);
-                userInput = consoleInputStream.askInputInt(" Select option: ");
+                System.out.println(" Select option: ");
+                userInput = waitInput(false);
+                if (userInput == 6) {
+                    toggleHelpPass();
+                    updateScore(-20);
+                    pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), false);
+                    System.out.println(" Select option: ");
+                    userInput = waitInput(true);
+                }            
             }
-
-            int solution = pr.getCorrectAnswer();
+            Integer solution = pr.getCorrectAnswer();
             if(userInput == solution){
                 updateScore(100);
                 int index = new Random().nextInt(filenames.length);
@@ -103,6 +115,7 @@ public class GameControl {
         return result;
     }
 
+
     public void setUser(){
         ConsoleIn consoleInputStream = new ConsoleIn();
         username = consoleInputStream.askInputString(" Type your name: ");
@@ -131,4 +144,30 @@ public class GameControl {
     public Integer getScore(){
         return playerScore;
     }
-}
+
+    public Integer waitInput(boolean newTimer) {
+        if (newTimer == true) {
+            timer = 20;
+        }
+        ConsoleIn consoleInputStream = new ConsoleIn();  
+        Integer userInput = 0;
+        while (true) {
+            try {
+                pr.printTimer(timer--);
+                Thread.sleep(1_000);
+            } catch (InterruptedException e) {
+                System.out.println("Interrupted");
+                break;                
+            }      
+            userInput = consoleInputStream.askAnswerInt();
+            if (timer <= 0) {
+                userInput = 9;
+                break;
+            }
+            if (userInput != null && userInput >= 1 && userInput <= 6) {
+                break;
+            }
+        }    
+        return userInput;
+    }    
+}        

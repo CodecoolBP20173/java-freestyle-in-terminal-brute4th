@@ -1,10 +1,12 @@
 package com.codecool.game;
 
 import java.util.Scanner;
+import java.io.*;
 
 public class ConsoleIn {
     Scanner keyboard = new Scanner(System.in);
-    public int askInputInt(String informationText) {
+
+    public int askInputInt (String informationText) {
 		Boolean error = false;
 		String userInp = "";
 		do {
@@ -19,7 +21,28 @@ public class ConsoleIn {
 		} while (error == true);
 		return Integer.parseInt(userInp);
     }
-    
+
+    public static Integer askAnswerInt() {
+		try {
+            if (System.in.available() > 0) {
+                String str = "";
+                char c;
+                while (true) {
+                    c = (char)System.in.read ();
+                        if ((c == '\n') || (c == ' ')) {
+                        break;
+                    }
+                    str += c;
+                }
+                Integer n = new Integer(str.trim());
+                return n.intValue();
+            }    
+        } catch (IOException |NumberFormatException e) {
+            System.err.println("Error " + e.getMessage());
+        }
+        return null;
+    } 
+
     public int askInputChar(String informationText) {
 		Boolean error = false;
 		String userInp = "";
