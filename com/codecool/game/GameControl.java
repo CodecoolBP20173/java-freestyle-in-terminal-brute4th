@@ -1,20 +1,23 @@
 package com.codecool.game;
 
 import com.codecool.data_manager.*;
-import com.codecool.game.*;
+import com.codecool.game.Printer;
+import com.codecool.game.ConsoleIn;
 import com.codecool.termlib.Terminal;
 import java.util.*;
+import com.codecool.game.AsciiDrawer;
+import java.util.concurrent.TimeUnit;
 
 public class GameControl {
 
     int numberOfQuestions=6;
 
-    public void mainGame(){
+    public void mainGame() throws Exception{
         ReadFile read = new ReadFile();
         Printer pr = new Printer();
         ConsoleIn consoleInputStream = new ConsoleIn();
-        Score score = new Score();
-
+        Terminal term = new Terminal();
+        AsciiDrawer drawer = new AsciiDrawer();
 
         ArrayList<HashMap<String, String>> questions = read.questions();
         ArrayList<Integer> questionOrder = randNumberList(numberOfQuestions);
@@ -26,12 +29,16 @@ public class GameControl {
             int solution = pr.getCorrectAnswer();
             if(userInput == solution){
                 //placeholder
-                System.out.println("telibe");
-                score.countScore(20);
-
+                //System.out.println("telibe");
+                //term.moveTo(10, 10);
+                term.clearScreen();
+                drawer.printTextArt(30, 20, "TELIBE", AsciiDrawer.ART_SIZE_HUGE);
+                TimeUnit.SECONDS.sleep(3);
             } else {
                 //placeholder
-                System.out.println(":(");
+                term.clearScreen();
+                drawer.printTextArt(70, 15, ": (", AsciiDrawer.ART_SIZE_HUGE);
+                TimeUnit.SECONDS.sleep(3);
             }
         }
             
