@@ -1,6 +1,7 @@
 package com.codecool.game;
 
 import com.codecool.termlib.Terminal;
+import com.codecool.termlib.Color;
 import com.codecool.termlib.Direction;
 import com.codecool.data_manager.*;
 
@@ -36,6 +37,7 @@ public class Printer {
 
         Terminal pt = new Terminal();
         pt.clearScreen();
+        displayLogo();
         pt.moveTo(refX -(question.length()/2), refY);
         System.out.print(question);
         pt.moveTo(refX - 45, refY + 6);
@@ -101,5 +103,20 @@ public class Printer {
     public Integer getCorrectAnswer(){
         return correctAnswer;
     }
+
+    public void displayLogo(){
+        ReadFile txtInput = new ReadFile();
+        Terminal term = new Terminal();
+        ArrayList<String> logo = txtInput.readFile("logo");
+        term.setColor(Color.YELLOW.getColorCode());
+        term.moveTo(17, 3);
+        for (int i=0; i < logo.size(); i++) {
+            term.moveTo(17, 3+i);
+            System.out.println(logo.get(i));
+        }
+        term.setColor(Color.DEFAULT.getColorCode());
+
+    }
+
 
 }
