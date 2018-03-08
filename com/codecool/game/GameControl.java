@@ -10,12 +10,12 @@ import java.util.Random;
 public class GameControl {
 
     int numberOfQuestions=6;
-    String[] filenames = {"dance"};
-    int[] heights = {3};
-    int[] frames = {24};
-    int[] sleep = {150};
-    int[] x = {0};
-    int[] y = {30};
+    String[] filenames = {"dance", "narwhal"};
+    int[] heights = {3, 15};
+    int[] frames = {24, 52};
+    int[] sleep = {150, 150};
+    int[] x = {0, 65};
+    int[] y = {30, 30};
 
     public void mainGame() throws Exception{
         ReadFile read = new ReadFile();
@@ -43,9 +43,9 @@ public class GameControl {
                 a.AnswerAnimation(filenames[index], heights[index], frames[index], sleep[index], x[index], y[index]);
                 TimeUnit.SECONDS.sleep(1);
             } else {
-                //placeholder
                 term.clearScreen();
-                drawer.printTextArt(70, 15, ": (", AsciiDrawer.ART_SIZE_HUGE);
+                Animation a = new Animation();
+                a.AnswerAnimation("fail", 8, 9, 400, 0, 30);
                 TimeUnit.SECONDS.sleep(3);
             }
         }
