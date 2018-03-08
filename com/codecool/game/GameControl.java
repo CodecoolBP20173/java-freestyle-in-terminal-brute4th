@@ -45,21 +45,21 @@ public class GameControl {
         ArrayList<Integer> questionOrder = randNumberList(numberOfQuestions);
 
         for (int i = 0; i < questionOrder.size()-1; i++) {
-            int userInput;
             int num=questionOrder.get(i);
+            int bonusQuestion = questionOrder.get(questionOrder.size()-1);
             pr.displayQuestionsAnswers(questions.get(num), false);
             System.out.println(" Select option: ");
             Integer userInput = waitInput(true);
             if (userInput == 6) {
                 toggleHelpPass();
                 updateScore(-20);
-                pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), false);
+                pr.displayQuestionsAnswers(questions.get(bonusQuestion), false);
                 System.out.println(" Select option: ");
                 userInput = waitInput(true);
                     if (userInput == 5) {
                         updateScore(-20);
                         toggleHelpHalving();
-                        pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), true);
+                        pr.displayQuestionsAnswers(questions.get(bonusQuestion), true);
                         System.out.println(" Select option: ");
                         userInput = waitInput(false);
                         }    
@@ -73,7 +73,7 @@ public class GameControl {
                 if (userInput == 6) {
                     toggleHelpPass();
                     updateScore(-20);
-                    pr.displayQuestionsAnswers(questions.get(questionOrder.size()-1), false);
+                    pr.displayQuestionsAnswers(questions.get(bonusQuestion), false);
                     System.out.println(" Select option: ");
                     userInput = waitInput(true);
                 }            
