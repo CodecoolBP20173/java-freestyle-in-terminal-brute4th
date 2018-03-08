@@ -4,6 +4,7 @@ import com.codecool.termlib.Terminal;
 import com.codecool.termlib.Color;
 import com.codecool.termlib.Direction;
 import com.codecool.data_manager.*;
+import com.codecool.game.AsciiDrawer;
 
 import java.util.*;
 
@@ -91,14 +92,25 @@ public class Printer {
         }
     }
 
-    public void displayTopScore(int amount) {
+    public void displayTopScore(int amount) throws Exception {
         ReadFile read = new ReadFile();
+        Terminal term = new Terminal();
+        AsciiDrawer drawer = new AsciiDrawer();
+
         Map<String, Integer> topScore = read.getScore();
         int count = 0;
+        drawer.printTextArt(35, 10, "Top Scores", AsciiDrawer.ART_SIZE_MEDIUM);
+        System.out.println();
+        System.out.println();
+
+        Integer placement=1;
         for (String name : topScore.keySet()) {
             if (count >= amount) break;
-            System.out.println(name + ": " + topScore.get(name));
+            term.moveCursor("C", 80);
+            System.out.println(placement.toString() + ". " + name + ": " + topScore.get(name));
+            placement++;
             }
+        term.moveTo(80, 50);
     }
     public Integer getCorrectAnswer(){
         return correctAnswer;
