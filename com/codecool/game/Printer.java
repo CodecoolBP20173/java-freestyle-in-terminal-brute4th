@@ -5,6 +5,7 @@ import com.codecool.termlib.Color;
 import com.codecool.termlib.Direction;
 import com.codecool.data_manager.*;
 import com.codecool.game.AsciiDrawer;
+import com.codecool.game.GameControl;
 
 import java.util.*;
 
@@ -17,7 +18,7 @@ public class Printer {
 
     int correctAnswer;
 
-    public void displayQuestionsAnswers(HashMap hm, boolean halving){
+    public void displayQuestionsAnswers(HashMap hm, boolean halving) throws Exception{
         String question = hm.get("question").toString();
         String answer1 = hm.get("a1").toString();
         String answer2 = hm.get("a2").toString();
@@ -25,7 +26,7 @@ public class Printer {
         String answer4 = hm.get("aGood").toString();
 
         ArrayList<String> randomOrderList = new ArrayList<String>();
-        if (halving == false) {
+        if (!halving) {
         randomOrderList.add(answer1);
         randomOrderList.add(answer2);
         }
@@ -35,7 +36,7 @@ public class Printer {
         Collections.shuffle(randomOrderList);
         correctAnswer = randomOrderList.indexOf(answer4) + 1;
 
-        int refX=(cols/2);
+        int refX=(cols/2) - 15;
         int refY=lines-15;
 
         Terminal pt = new Terminal();
@@ -58,6 +59,24 @@ public class Printer {
         drawBox(refX +30, refY + 6, "small");
         drawBox(refX -30, refY + 13, "small");
         drawBox(refX +30, refY + 13, "small");
+
+        GameControl gc = new GameControl();
+        AsciiDrawer drawer = new AsciiDrawer();
+        boolean checkHelpHalving = gc.getHelpHalving();
+        if (checkHelpHalving){
+            pt.moveTo(140, 29);
+            pt.setUnderline("Available help: ");
+            pt.resetStyle();
+        } else {
+            pt.moveTo(150, 38);
+            System.out.print("No more help.");
+        }
+
+        if(checkHelpHalving){
+            pt. moveTo(140, 31);
+            System.out.print("Press 5: ");
+            drawer.printTextArt(140, 33, "50 :50", AsciiDrawer.ART_SIZE_SMALL);
+        }
 
         pt.moveTo(0, lines); 
     }
