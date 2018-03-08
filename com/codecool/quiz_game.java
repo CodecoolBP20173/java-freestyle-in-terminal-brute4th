@@ -30,13 +30,16 @@ public class quiz_game {
         System.out.println(questions.get(0));
         */
         GameControl controller = new GameControl();
+        Score score = new Score();
 
         switch(HomeScreen.getOption()){
             case 1:
+                String username = controller.welcomePage();
                 controller.mainGame();
                 break;
             case 2:
                 //controller.showScores();
+                score.printScore();
                 break;
             case 3:
                 //controller.showCredits();
