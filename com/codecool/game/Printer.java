@@ -37,19 +37,19 @@ public class Printer {
         pt.clearScreen();
         pt.moveTo(refX -(question.length()/2), refY);
         System.out.print(question);
-        pt.moveTo(refX - 35, refY + 6);
+        pt.moveTo(refX - 45, refY + 6);
         System.out.print("1. " + randomOrderList.get(0));
-        pt.moveTo(refX + 35, refY + 6);
+        pt.moveTo(refX + 15, refY + 6);
         System.out.print("2. " + randomOrderList.get(1));
-        pt.moveTo(refX - 35, refY + 13);
+        pt.moveTo(refX - 45, refY + 13);
         System.out.print("3. " + randomOrderList.get(2));
-        pt.moveTo(refX + 35, refY + 13);
+        pt.moveTo(refX + 15, refY + 13);
         System.out.println("4. " + randomOrderList.get(3));
         drawBox(refX, refY, "large");
-        drawBox(refX -35, refY + 6, "small");
-        drawBox(refX +35, refY + 6, "small");
-        drawBox(refX -35, refY + 13, "small");
-        drawBox(refX +35, refY + 13, "small");
+        drawBox(refX -30, refY + 6, "small");
+        drawBox(refX +30, refY + 6, "small");
+        drawBox(refX -30, refY + 13, "small");
+        drawBox(refX +30, refY + 13, "small");
 
         pt.moveTo(0, lines); 
     }
@@ -71,7 +71,7 @@ public class Printer {
                 break;
         }
         
-        String horizontalLine = new String(new char[boxWidth]).replace("\0", "_");
+        String horizontalLine = new String(new char[boxWidth+1]).replace("\0", "_");
         pt.moveTo(x-boxWidth/2, y - (boxHeight/2));
         System.out.print(horizontalLine);
         pt.moveTo(x-boxWidth/2, y + (boxHeight/2-1));
