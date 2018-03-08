@@ -21,7 +21,7 @@ public class GameControl {
     int[] sleep = {150, 150, 150, 150};
     int[] x = {0, 65, 65, 65};
     int[] y = {30, 30, 30, 30};
-    int numberOfQuestions=6;
+    int numberOfQuestions=11;
     public static String username = "";    
 
     public String welcomePage() {
@@ -42,8 +42,9 @@ public class GameControl {
         ArrayList<HashMap<String, String>> questions = read.questions();
         ArrayList<Integer> questionOrder = randNumberList(numberOfQuestions);
 
-        for (int num = 0; num < questionOrder.size()-1; num++) {
+        for (int i = 0; i < questionOrder.size()-1; i++) {
             int userInput;
+            int num=questionOrder.get(i);
             pr.displayQuestionsAnswers(questions.get(num), false);
             userInput = consoleInputStream.askInputInt(" Select option: ");
 
