@@ -1,5 +1,7 @@
 package com.codecool.game;
 
+import com.codecool.game.*;
+import com.codecool.termlib.*;
 import com.codecool.game.ConsoleIn;
 import com.codecool.termlib.Terminal;;
 
@@ -8,8 +10,18 @@ public class Menu {
     private int option;
 
     public void printMainMenu() {
-        Animation menu = new Animation();
-        menu.MainMenu(17,30);
+        Terminal term = new Terminal();
+        term.clearScreen();
+
+        System.out.println("============================");
+        System.out.println("|        QUIZ  GAME        |");
+        System.out.println("============================");
+        System.out.println("| Options:                 |");
+        System.out.println("|        1. New Game       |");
+        System.out.println("|        2. High Scores    |");
+        System.out.println("|        3. Credits        |");
+        System.out.println("|        4. Exit           |");
+        System.out.println("============================");
     }
     
     public void handleMainMenu() {
@@ -28,8 +40,8 @@ public class Menu {
             break;
             case 2:
             System.out.println("Option 2 selected");
-            option=2;
-            exit = true;
+            //Score show = new Score();
+            //show.handleScore();
             break;
             case 3:
             System.out.println("Option 3 selected");

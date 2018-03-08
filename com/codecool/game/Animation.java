@@ -17,7 +17,9 @@ public class Animation {
         for (int i = 0; i < frames; i++) {
             Terminal term = new Terminal();
             term.clearScreen();
+            term.moveTo(50, 20);
             for (int j = 0; j < height; j++) {
+                term.moveTo(50, 20+j);
                 System.out.println(ascii_animation.get(index));
                 index+=1;
             }
@@ -30,7 +32,7 @@ public class Animation {
 
     }
 
-    public void BadAnswer(int height, int frames) {
+    public void BadAnswer(int height, int frames, int sleep) {
         String[] filenames = new String[2]; // ide kell betölteni a txt fájl nevét 
         ArrayList<String> ascii_animation = txtInput.readFile(filenames[new Random().nextInt(filenames.length)]);
         int index = 0;
@@ -42,7 +44,7 @@ public class Animation {
                 index+=1;
             }
             try {
-                Thread.sleep(25);
+                Thread.sleep(sleep);
             } catch (Exception e) {
                 System.out.println(e);
             }
