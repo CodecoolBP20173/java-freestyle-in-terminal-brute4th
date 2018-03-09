@@ -14,6 +14,7 @@ public class GameControl {
     public static boolean helpHalving = true;
     public static boolean helpPass = true;
     public static Integer playerScore = 0;
+    ConsoleIn consoleInputStream = new ConsoleIn();
     
     String[] filenames = {"dance", "narwhal.1", "narwhal.2", "narwhal.3"};
     int[] heights = {3, 15, 15, 15};
@@ -37,7 +38,6 @@ public class GameControl {
 
     public void mainGame() throws Exception{
         ReadFile read = new ReadFile();
-        ConsoleIn consoleInputStream = new ConsoleIn();
         Terminal term = new Terminal();
         AsciiDrawer drawer = new AsciiDrawer();
 
@@ -117,7 +117,6 @@ public class GameControl {
 
 
     public void setUser(){
-        ConsoleIn consoleInputStream = new ConsoleIn();
         username = consoleInputStream.askInputString(" Type your name: ");
     }
 
@@ -148,8 +147,7 @@ public class GameControl {
     public Integer waitInput(boolean newTimer) {
         if (newTimer == true) {
             timer = 20;
-        }
-        ConsoleIn consoleInputStream = new ConsoleIn();  
+        } 
         Integer userInput = 0;
         while (true) {
             try {
