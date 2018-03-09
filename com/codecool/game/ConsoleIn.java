@@ -60,19 +60,7 @@ public class ConsoleIn {
 	}
 
 	public String askInputString(String informationText) {
-		Boolean error = false;
-		String userInp = "";
-		do {
-			System.out.print(informationText);
-			userInp = keyboard.nextLine();
-			if (!isType(userInp, "string")) {
-				error = true;
-				System.err.println("Error: must be a string.");
-			} else {
-				error = false;
-			}
-		} while (error == true);
-		return userInp;
+		return keyboard.nextLine();
 	}
 
     public Boolean isType(String testStr, String type) {
@@ -81,10 +69,7 @@ public class ConsoleIn {
 				testStr.charAt(0);
 			} else if (type.equalsIgnoreCase("int")) {
 				Integer.parseInt(testStr);
-			} 
-			else if (type.equalsIgnoreCase("string")) {
-				return true;
-			} 
+			}
 			return true;
 		} catch(Exception e) {
 			return false;
