@@ -212,6 +212,4 @@ public class Printer {
         }
         pt.setColor(Color.DEFAULT.getColorCode());
     }
-
-
 }
