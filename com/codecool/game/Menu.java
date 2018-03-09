@@ -18,6 +18,7 @@ public class Menu {
 
         while (!exit) {
             printMainMenu();
+            exit = false;
             userInput = consoleInputStream.askInputInt (" Select option: ");
             switch (userInput) {
             case 1:
