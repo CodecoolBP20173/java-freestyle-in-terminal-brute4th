@@ -19,6 +19,7 @@ public class Menu {
         while (!exit) {
             printMainMenu();
             exit = false;
+            controller.playerScore = 0;
             userInput = consoleInputStream.askInputInt (" Select option: ");
             switch (userInput) {
             case 1:
